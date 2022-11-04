@@ -13,30 +13,34 @@
       </div>
       <script>
         const app = Vue.createApp({
+            data:()=>({
+                items:["Item 1","Item 2","Item 3"]
+            }),
+            methods:{
+                remove(i){
+                    this.items = this.items.filter((item,index )=> index!==i)
+                }
+            },
             template:`
-            <div>
-                <v-layout>
-                    <template v-slot:header>
-                        <button>Titulo</button>
-                    </template>
-                    <template v-slot:content>
-                    <div>Contenido</div>
-                    </template>
-                </v-layout>
-                
-            </div>
+                <ul>
+                    <v-item v-for="(item,i) in items" :key="i" :item="item" @remove="remove(i)"/>
+                    
+                </ul>
             `
         })
-        app.component('v-layout',{
+        app.component('v-item',{
+            props:{
+                item:{
+                    type:String
+                }
+            },
+            methods:{
+                rm(){
+                    this.$emit("remove")
+                }
+            },
             template:`
-           
-                <header>
-                    <slot name="header"></slot
-                </header>
-                <div>
-                    <slot name="content"></slot>    
-                </div>
-                
+           <li @click="rm">{{item}}</li>         
             `
         })        
         const vm =app.mount('#app')
