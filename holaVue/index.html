@@ -8,14 +8,21 @@
   </head>
   <body>
       <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-      <div id="app">
-        <h1>{{text}}</h1>
-      </div>
+      <div id="app"></div>
       <script>
         const vm = Vue.createApp({
             data:()=>({
                 text:"Hola Vue"
-            })
+            }),
+            methods:{
+                input(e){
+                    this.text = e.target.value
+                }
+            },
+            template:`
+                <p>{{text}}</p>
+                <input type="text" @input="input" :value="text" />
+            `
         }).mount('#app')
         console.log(vm);
       </script>
