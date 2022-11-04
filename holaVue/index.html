@@ -9,14 +9,37 @@
   <body>
       <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
       <div id="app">
-        <h1>{{text}}</h1>
+       
       </div>
       <script>
-        const vm = Vue.createApp({
-            data:()=>({
-                text:"Hola Vue"
-            })
-        }).mount('#app')
+        const app = Vue.createApp({
+            template:`
+            <div>
+                <v-layout>
+                    <template v-slot:header>
+                        <button>Titulo</button>
+                    </template>
+                    <template v-slot:content>
+                    <div>Contenido</div>
+                    </template>
+                </v-layout>
+                
+            </div>
+            `
+        })
+        app.component('v-layout',{
+            template:`
+           
+                <header>
+                    <slot name="header"></slot
+                </header>
+                <div>
+                    <slot name="content"></slot>    
+                </div>
+                
+            `
+        })        
+        const vm =app.mount('#app')
         console.log(vm);
       </script>
   </body>
