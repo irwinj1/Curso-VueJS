@@ -9,14 +9,46 @@
   <body>
       <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
       <div id="app">
-        <h1>{{text}}</h1>
+        
       </div>
       <script>
-        const vm = Vue.createApp({
+        const app = Vue.createApp({
             data:()=>({
                 text:"Hola Vue"
-            })
-        }).mount('#app')
+            }),
+            methods:{
+                cambioTexto(text){
+                    this.text=text
+                }
+            },
+            template:`
+                <div>
+                    <p>{{text}}</p>
+                    <v-input v-model:text="text" />
+                </div>
+            
+            `
+        })
+        app.component('v-input',{
+            props:{
+                text:{
+                    type:String
+                }
+            },
+            methods:{
+                changeText(e){
+                    this.$emit("update:text",e.target.value)
+                }
+            },
+            template:`
+              
+                    <input type="text"  @input="changeText" :value="text" />
+                    
+               
+            
+            `
+        })
+        const vm = app.mount('#app')
         console.log(vm);
       </script>
   </body>
