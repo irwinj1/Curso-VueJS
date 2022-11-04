@@ -14,13 +14,23 @@
       <script>
         const vm = Vue.createApp({
             data:()=>({
-                puerta:"Puerta Cerrada",
+                puerta:"Accede a tu cuenta",
                 open:false,
+                username:"",
+                posts:[
+                    {title:"titulo 1",description:"lorem ipssum..."},
+                    {title:"titulo 2",description:"lorem ipssum..."},
+                    {title:"titulo 3",description:"lorem ipssum..."},
+                    {title:"titulo 4",description:"lorem ipssum..."},
+                    {title:"titulo 5",description:"lorem ipssum..."},
+                    {title:"titulo 6",description:"lorem ipssum..."},
+                ]
                
             }),
             watch:{
                 open(value){
-                    value?this.puerta="Puerta abierta":this.puerta = "Puerta cerrada"
+                    value?this.puerta="Cerrar sesión":this.puerta = "Accede a tu cuenta"
+                    !value?this.username ="":""
                 }
             },
             methods:{
@@ -30,7 +40,7 @@
             },
             computed:{
                 label(){
-                    return this.open?"Cerrar":"Abrir"
+                    return this.open?"Salir":"Acceder"
                 },
                 styles(){
                     return this.open?['open']:['closed']
@@ -38,9 +48,26 @@
             },
             template:`
                 <div class="container" :class="styles">
-                <h2>{{puerta}}</h2>
-                <button @click="openCloseDoor">{{label}}</button>
-                </div>
+                    <h2>{{puerta}}</h2>
+                    <div v-if="open">
+                        <div >Hola, {{username}}</div>
+                        <br>
+                        <div class="list" v-for="(post,i) in posts" :key="i">
+                            <div class="item">
+                                <div class="title">{{post.title}}</div>
+                                <p>{{post.description}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div v-else>
+                        <div>username</div>
+                        <input type="tex" v-model="username" />
+                    </div>
+                    <button @click="openCloseDoor">
+                        <div v-if="open">Salir</div>
+                        <div v-else>Acceder</div>
+                    </button>
+                </div>  
                 `
         }).mount('#app')
         console.log(vm);
@@ -71,6 +98,18 @@
         }
         .open {
             background-color: #b5e7a0;
+        }
+        .list{
+            display: inline-block;
+            flex-direction: column;
+            margin: 3px;
+        }
+        .item{
+            border: 1px solid black;
+        }
+        .title{
+            font-weight: bold;
+            font-size: 1.5em;
         }
     </style>
   </body>
