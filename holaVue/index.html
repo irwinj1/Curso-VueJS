@@ -8,15 +8,29 @@
   </head>
   <body>
       <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-      <div id="app">
-        <h1>{{text}}</h1>
-      </div>
+        <div id="app"></div>
       <script>
         const vm = Vue.createApp({
             data:()=>({
-                text:"Hola Vue"
-            })
+                counter:0
+            }),
+            methods:{
+                increment() {
+                    this.counter++
+                },
+                decrement(){
+                    this.counter--
+                }
+            },
+            template:`<div>
+                <p>{{counter}}</p>
+                <form v-on:submit.prevent="">
+                <button v-on:click="increment">+</button>
+                <button v-on:click="decrement">-</button>
+            </form>
+                </div>`
         }).mount('#app')
+
         console.log(vm);
       </script>
   </body>
