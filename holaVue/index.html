@@ -9,13 +9,14 @@
   <body>
       <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
       <div id="app">
-        <h1>{{text}}</h1>
+        
       </div>
       <script>
         const vm = Vue.createApp({
             data:()=>({
-                text:"Hola Vue"
-            })
+                text:"<p>Hola Vue</p>"
+            }),
+            template:`<div v-once v-html="text"></div>`
         }).mount('#app')
         console.log(vm);
       </script>
