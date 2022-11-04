@@ -9,14 +9,16 @@
   <body>
       <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
       <div id="app">
-        
+       
       </div>
       <script>
         const vm = Vue.createApp({
             data:()=>({
-                text:"<p>Hola Vue</p>"
+                attr:"src",
+                img:"https://codingbeautydev.com/wp-content/uploads/2022/02/Artboard-1-2-1024x576.png",
+                name:"Vuetify"
             }),
-            template:`<div v-once v-html="text"></div>`
+            template:`<div > <img v-bind:[attr]="img" v-bind:alt="name"></div>`
         }).mount('#app')
         console.log(vm);
       </script>
