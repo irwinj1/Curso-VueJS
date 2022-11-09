@@ -8,7 +8,7 @@
             <template #resume>
                 <Resume :label="label" :totalAmount="100000" :amount="amount" >
                     <template #graphic>
-                        <Graphic />
+                        <Graphic :amounts="amounts"/>
                     </template>
                     <template #action>
                         <Action />
@@ -34,50 +34,68 @@ export default {
     data:()=>({
         amount:null,
         label:null,
+        //amounts:[1000,500,-500,300,-100,900,-15,0,500],
         movements:[
             {
                 id:1,
                 title:"Movimiento",
                 description:"Deposito de salario",
-                amount:1000
+                amount:1000,
+                time: new Date("01/05/2022")
             },
             {
                 id:2,
                 title:"Movimiento 2",
                 description:"Deposito de honorarios",
-                amount:500
+                amount:500,
+                time: new Date("01/15/2022")
             },
             {
                 id:3,
                 title:"Movimiento 3",
                 description:"Comida",
-                amount:-100
+                amount:-100,
+                time: new Date("01/25/2022")
             },
             {
                 id:4,
                 title:"Movimiento 4",
                 description:"Colegiatura",
-                amount:1000
+                amount:1000,
+                time: new Date("02/01/2022")
             },
             {
                 id:5,
                 title:"Movimiento 5",
                 description:"Reaparación de equipo",
-                amount:1000
+                amount:1000,
+                time: new Date("02/01/2022")
             },
             {
                 id:6,
                 title:"Movimiento 6",
                 description:"Reaparación de equipo",
-                amount:1000
+                amount:1000,
+                time: new Date("02/01/2022")
             },
             {
                 id:7,
                 title:"Movimiento 7",
                 description:"Reaparación de equipo",
-                amount:1000
+                amount:1000,
+                time: new Date("02/01/2022")
             },
         ]
-    })
+    }),
+    computed:{
+        amounts(){
+            return this.movements.filter(m =>{
+                const today = new Date()
+                const oldDate = today.setDate(today.getDay() -30)
+                return m.time <= oldDate
+            })
+            .map(m=>m.amount)
+        }
+    }
 }
 </script>
