@@ -1,14 +1,42 @@
 <template>
-    <div class="movement">{{title}}</div>
+    <div class="movement">
+        <div class="content">
+            <h4>{{title}}</h4>
+            <p>{{description}}</p>
+        </div>
+        <div class="action">
+            <img src="@/assets/trash-icon.svg" alt="borrar" @click="remove">
+            <p :class="amount>=0?'green':'red'">{{amountCurrency}}</p>
+        </div>
+    </div>
 </template>
 <script setup>
-import { defineProps, toRefs } from 'vue';
+import { computed, defineProps, toRefs } from 'vue';
+const currencyFormatter = new Intl.NumberFormat(undefined, {
+	style: 'currency',
+	currency: 'USD'
+});
 const props = defineProps({
+    id:{
+        type:Number
+    },
     title:{
         type:String
+    },
+    description:{
+        type:String
+    },
+    amount:{
+        type:Number
     }
 })
-const {title}=toRefs(props)
+const {id,title,description,amount}=toRefs(props)
+
+const amountCurrency = computed(()=>currencyFormatter.format(amount.value))
+const emit = defineEmits(['remove'])
+const remove = ()=>{
+    emit('remove',id.value)
+}
 </script>
 <style scoped>
 .movement {
@@ -20,6 +48,7 @@ const {title}=toRefs(props)
   background-color: #e6f9ff;
   border-radius: 8px;
   box-sizing: border-box;
+  margin-bottom: 5px;
 }
 .movement .content {
   width: 100%;

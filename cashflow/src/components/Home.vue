@@ -7,8 +7,12 @@
             </template>
             <template #resume>
                 <Resume :label="label" :totalAmount="100000" :amount="amount" >
-                    <template #graphic>Graphic:</template>
-                    <template #action>Action:</template>
+                    <template #graphic>
+                        <Graphic />
+                    </template>
+                    <template #action>
+                        <Action />
+                    </template>
                 </Resume>
             </template>
             <template #movements>
@@ -23,8 +27,10 @@ import Header from './Header.vue'
 import Layout from './Layout.vue';
 import Resume from '@/components/Resume/Index.vue'
 import Movements from './Movements/index.vue';
+import Action from './Action.vue';
+import Graphic from './Resume/Graphic.vue';
 export default {
-    components:{Layout,Header,Resume,Movements},
+    components:{ Layout, Header, Resume, Movements, Action, Graphic },
     data:()=>({
         amount:null,
         label:null,
@@ -54,8 +60,20 @@ export default {
                 amount:1000
             },
             {
-                id:1,
+                id:5,
                 title:"Movimiento 5",
+                description:"Reaparación de equipo",
+                amount:1000
+            },
+            {
+                id:6,
+                title:"Movimiento 6",
+                description:"Reaparación de equipo",
+                amount:1000
+            },
+            {
+                id:7,
+                title:"Movimiento 7",
                 description:"Reaparación de equipo",
                 amount:1000
             },
