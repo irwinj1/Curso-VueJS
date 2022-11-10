@@ -9,7 +9,7 @@
   </div>
 </template>
 <script setup>
-import { ref, defineProps, toRefs } from "vue";
+import { ref, defineProps, toRefs,defineEmits } from "vue";
 import Movement from "./Movement.vue";
 const props = defineProps({
   movements: {
@@ -19,8 +19,10 @@ const props = defineProps({
  
 });
 const { movements } = toRefs(props);
+
+const emit = defineEmits(['remove'])
 const remove = (id)=>{
-    console.log(id);
+   emit('remove',id)
 }
 </script>
 <style scoped>
@@ -40,4 +42,5 @@ const remove = (id)=>{
   gap: 8px;
   overflow-y: scroll;
 }
+
 </style>

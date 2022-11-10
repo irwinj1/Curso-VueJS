@@ -1,7 +1,7 @@
 <template>
   <main>
     <p>{{ labelAmount }}</p>
-    <h1>{{ amountCurrency }}</h1>
+    <h1 :class="totalAmount>0?'green':'red'">{{ amountCurrency }}</h1>
     <div class="graphic">
         <slot name="graphic"></slot>
     </div>
@@ -58,7 +58,7 @@ p {
 }
 h1 {
   margin-top: 14px;
-  color: var(--brand-green);
+ 
 }
 .graphic {
   display: flex;
@@ -67,5 +67,11 @@ h1 {
   width: 100%;
   padding: 48px 24px;
   box-sizing: border-box;
+}
+.red {
+  color: red;
+}
+.green {
+  color: green;
 }
 </style>
