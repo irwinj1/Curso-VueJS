@@ -8,6 +8,12 @@
   
   <script>
 export default {
+    props:{
+        chatId:{
+            type:String,
+            default:''
+        }
+    },
   data() {
     return {
       messages: [
@@ -20,7 +26,7 @@ export default {
   computed: {
     messagesFiltered() {
       return this.messages.filter((msg) => {
-        return `${msg.author}` === this.$route.params.chatId;
+        return `${msg.author}` === this.chatId;
       });
     },
   },

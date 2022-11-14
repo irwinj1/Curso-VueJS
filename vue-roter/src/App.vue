@@ -1,6 +1,7 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
 import HelloWorld from "./components/HelloWorld.vue";
+const isTest = import.meta.env.VITE_STAGE === 'test'
 </script>
 
 <template>
@@ -8,9 +9,11 @@ import HelloWorld from "./components/HelloWorld.vue";
     <header>
       <div class="wrapper">
         <nav>
-          <RouterLink to="/">Home</RouterLink>
-          <RouterLink to="/about">About</RouterLink>
+          <RouterLink :to="{name:'home'}">Home</RouterLink>
+          <RouterLink :to="{name:'about'}">About</RouterLink>
           <RouterLink to="/chats">Chats</RouterLink>
+          <RouterLink v-if="isTest" to="/profile">Profile</RouterLink>
+          <RouterLink to="/sesion">Sesiones</RouterLink>
         </nav>
         <HelloWorld msg="" />
       </div>
