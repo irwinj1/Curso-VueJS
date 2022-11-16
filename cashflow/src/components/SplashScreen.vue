@@ -1,6 +1,6 @@
 <template>
   <div class="splashscreen">
-    <img src="@/assets/cashflow-icon.svg" alt="logo" />
+    <img src="@/assets/esperaimag.jpg" alt="logo" />
 
     <h1>
         <span>Cash</span>Flow

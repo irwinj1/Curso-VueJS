@@ -1,24 +1,29 @@
-import { createStore } from 'vuex'
-import moduleProfile from './modules/profile/index.js'
+import { createStore } from "vuex";
+import moduleProfile from "./modules/profile/index.js";
+import {COMMIT_SET_STATUS} from '../common/mutation-types'
+import channels from './modules/channels/index.js'
+import messages from './modules/messages/index.js'
 
 const store = createStore({
-  state:{
-  
+  state: {
+    status: null,
   },
-  getters:{
-    firstName(state){
-        return state.username
-    }
+  getters: {
+    firstName(state) {
+      return state.username;
+    },
   },
-  mutations:{
-   
+  mutations: {
+    [COMMIT_SET_STATUS](state, value) {
+      state.status = value;
+    },
   },
-  actions:{
-   
+  actions: {},
+  modules: {
+    moduleProfile,
+    channels,
+    messages
   },
-  modules:{
-    moduleProfile
-  }
-})
+});
 
-export default store
+export default store;

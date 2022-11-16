@@ -33,7 +33,9 @@ export default {
     }
   },
   computed:{
-    ...mapState('moduleProfile',  ['username'])
+    ...mapState('moduleProfile',  ['username']),
+    ...mapState(['status']),
+    ...mapGetters('channels',['getChannels'])
   }
 
 }
@@ -46,12 +48,12 @@ export default {
     <ProfileCard
       :avatar="profile.avatar"
       :username="username"
-      :status="profile.status"
+      :status="status"
     />
     <RouterLink to="/" class="channels-title">Canales <Icon icon="carbon:hashtag" /></RouterLink>
     <div class="channels">
       <ChatItem
-        v-for="channel in channels"
+        v-for="channel in getChannels(search)"
         :key="channel.id"
         :id="channel.id"
         :name="channel.name"

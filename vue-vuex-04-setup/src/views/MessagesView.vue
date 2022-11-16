@@ -1,5 +1,6 @@
 <script>
 import MessageItem from '@/components/MessageItem.vue'
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -25,12 +26,14 @@ export default {
         { id: 9, author: 2, message: 'Ahhhh!!', timestamp: new Date().toLocaleTimeString() },
         { id: 10, author: 2, message: '¡Cuenta ese chismesito yaaaa!', timestamp: new Date().toLocaleTimeString() },
         { id: 11, author: 1, message: 'Pues, ¡acabamos de lanzar los nuevos cursos de Vue.js!', timestamp: new Date().toLocaleTimeString() },        
-      ]
+      ],
+      channelId:0
     }
   },
   computed: {
+    ...mapGetters('messages',['getMessages']),
     messagesView() {
-      return this.messages.map((message) => {
+      return this.getMessages(this.channelId)?.map((message) => {
         const author = this.people.find((p) => p.id === message.author)
         if (!author) return message;
         return {
@@ -44,7 +47,9 @@ export default {
   watch: {
     '$route.params.id': {
       immediate: true,
-      handler() {
+      handler(id) {
+        this.channelId = id
+        //console.log(id);
         this.scrollToBottom()
       }
     }
